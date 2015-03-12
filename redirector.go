@@ -11,15 +11,6 @@ import (
 
 type Redirector struct{}
 
-func lookup(host string) string {
-	dest := ""
-	err := db.Get(&dest, "SELECT rules FROM redirects WHERE host = $1", host)
-	if !noRows(err) {
-		log.Println(err)
-	}
-	return dest
-}
-
 var wwwrx = regexp.MustCompile(`\Awww\.`)
 
 func invertWWW(host string) string {
