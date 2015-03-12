@@ -14,7 +14,12 @@ var IGNORED_HOSTS = []string{"localhost", "redirectapp.com"}
 type Redirector struct{}
 
 func lookup(host string) string {
-	return ""
+	dest := ""
+	err := db.Get(&dest, "SELECT rules FROM redirects WHERE host = $1", host)
+	if !noRows(err) {
+		log.Println(err)
+	}
+	return dest
 }
 
 var wwwrx = regexp.MustCompile(`\Awww\.`)
