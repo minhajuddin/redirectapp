@@ -1,0 +1,18 @@
+---
+default: &default
+  host: www.redirectapp.com
+  env: {{.GOENV}}
+  db:  "host=/var/run/postgresql dbname=redirector_{{.GOENV}} sslmode=disable"
+  max_db_connections: 10
+  port: ":3000"
+
+development:
+  <<: *default
+  host: localhost
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  port: ":8080"

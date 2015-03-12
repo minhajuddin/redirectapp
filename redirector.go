@@ -9,8 +9,6 @@ import (
 	"strings"
 )
 
-var IGNORED_HOSTS = []string{"localhost", "redirectapp.com"}
-
 type Redirector struct{}
 
 func lookup(host string) string {

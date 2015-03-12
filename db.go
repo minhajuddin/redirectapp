@@ -10,11 +10,9 @@ import (
 
 var db *sqlx.DB
 
-const MAX_DB_CONNECTIONS = 10
-
 func connectDB() {
-	db = sqlx.MustOpen("postgres", "host=/var/run/postgresql dbname=redirector_development sslmode=disable")
-	db.SetMaxOpenConns(MAX_DB_CONNECTIONS)
+	db = sqlx.MustOpen("postgres", config.DB)
+	db.SetMaxOpenConns(config.MaxDBConnections)
 }
 
 func noRows(err error) bool {
