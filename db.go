@@ -21,6 +21,7 @@ func noRows(err error) bool {
 	return sql.ErrNoRows == err
 }
 
+//TODO add validation and respond accordingly
 func createRedirect(vals url.Values) bool {
 	//add validation
 	res, err := db.Exec("INSERT INTO redirects (host, rules) VALUES($1, $2);", vals["host"][0], vals["rules"][0])

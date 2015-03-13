@@ -16,3 +16,8 @@ go build
 ~~~~
 
 
+# TODO
+  - Add caching
+  - Add verification
+  - Add validation
+  - Add google oauth

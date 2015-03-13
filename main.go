@@ -22,6 +22,11 @@ var (
 )
 
 func main() {
+	//start server
+	log.Fatal(http.ListenAndServe(config.Port, nil))
+}
+
+func init() {
 	//set log format
 	log.SetFlags(log.Ldate | log.Ltime | log.Lmicroseconds | log.Lshortfile)
 	log.Println("starting server at http://localhost:3000/")
@@ -43,11 +48,10 @@ func main() {
 	log.Println(config.Host)
 	http.HandleFunc(config.Host+"/", redirectsHandler)
 	http.Handle("/", &Redirector{})
-
-	log.Fatal(http.ListenAndServe(config.Port, nil))
 }
 
 func redirectsHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.Method, r.RequestURI)
 	switch r.Method {
 	case "GET":
 		w.Write(INDEX_HTML)
